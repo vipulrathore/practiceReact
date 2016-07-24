@@ -10,6 +10,15 @@ export default class Todos extends React.Component {
             'todos': TodoStore.getAll()
         };
     }
+
+    componentWillMount() {
+        TodoStore.on("change", () =>{
+            this.setState({
+                todos: TodoStore.getAll()
+            })
+        })
+    }
+
     render() {
         const { todos } = this.state;
         const TodoComponents = todos.map((todo) => {
